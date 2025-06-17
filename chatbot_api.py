@@ -9,10 +9,16 @@ from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_community.llms import Cohere
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 
+
+
+from langchain.embeddings import HuggingFaceInferenceAPIEmbeddings
+import os
+
+
+from langchain.llms import Cohere
 # Step 1: Load all documents
 file_paths = ["data/resume_data.txt", "data/portfolio_data.txt", "data/mkcrack.txt"]
 documents = []
@@ -27,12 +33,19 @@ splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 chunks = splitter.split_documents(documents)
 
 # Step 3: Embed using Hugging Face
-embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
+# Set your model and API token
+embeddings = HuggingFaceInferenceAPIEmbeddings(
+    api_key=os.environ["HUGGINGFACEHUB_API_TOKEN"],
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
 vectorstore = FAISS.from_documents(chunks, embeddings)
 
 # Step 4: Initialize Cohere's command model
+
+
 llm = Cohere(
-    cohere_api_key="UmGsEzxaVUL8tGoYX0H59BG0ZiA33g4tvGmpMzMX",  # Replace with env var in production
+    cohere_api_key=os.environ["COHERE_API_KEY"],
     model="command"
 )
 
