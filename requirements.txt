@@ -8,3 +8,4 @@ langchain-huggingface
 cohere
 faiss-cpu
 pydantic
+sentence-transformers
