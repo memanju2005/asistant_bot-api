@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+langchain
+langchain-community
+langchain-core
+langchain-cohere
+langchain-huggingface
+cohere
+faiss-cpu
+pydantic

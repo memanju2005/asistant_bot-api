@@ -1,0 +1,46 @@
+[About]
+Manjunath Kotabagi is a CSBS student at VTU. He has strong skills in Python, C, and C++. 
+
+As a Frontend Developer, he enjoys building responsive and user-friendly websites using HTML, CSS, and JavaScript.
+
+[Skills]
+- Python: 60%
+- Java: 20%
+- Data Structures & Algorithms (DSA): 30%
+- Frontend Development: 30%
+- Machine Learning: 50%
+
+[Projects]
+1)yukti-2k25
+2)flipkart Clone
+3)law and crime Assistant
+
+1. Yukti 2K25 – National Level Technical Fest  
+   Helped with the front-end part of the official website for event updates and registrations.  
+   Ensured a clean and functional user interface.  
+   View Site: https://yukti.bastamasta.dev/ 
+   Source Code: https://github.com/BastaMasta/yukti-2k25
+
+2. Flipkart Clone  
+   A desktop clone of Flipkart's homepage built using HTML, CSS, and JavaScript.  
+   It replicates the layout and design of the Flipkart homepage.  
+   View Site: [link not included]  
+   Source Code: https://github.com/memanju2005/flipkart_clone
+
+3. Law and Crime Assistant  
+   A chatbot that provides structured answers about IPC sections using Cohere,  
+   or retrieves recent crime case updates using Serper API.  
+   Project Link: https://github.com/memanju2005/law_and_crime_assistant
+
+
+[Contact Info]
+- Linkedin: https://www.linkedin.com/in/manjunath-kotabagi/
+- Instagram:https://www.instagram.com/_manju_k_17/?igsh=MTByMTF5Z2M2NjBscQ%3D%3D#
+- Github: https://github.com/memanju2005
+- Mail: kotabagimanju240@gmail.com
+- Phone/Call:8152900191
+
+
+
+[Copyright]
+© 2025 Manjunath Kotabagi. All rights reserved.

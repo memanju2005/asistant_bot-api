@@ -1,0 +1,83 @@
+ [About / Profile Summary]
+Passionate CSBS student at VTU with strong skills in Python, C, and C++, and a solid foundation in DSA, OOP, and MySQL.
+Experienced in front-end development with HTML, CSS, and JavaScript.
+Quick learner with strong collaboration and problem-solving skills, eager to build real-world solutions.
+
+ [Education]
+Visvesvaraya Technological University (VTU), Belagavi
+B.Tech in Computer Science and Business Systems (CSBS)
+Duration: 2022 – 2026
+CGPA: 8.67
+
+ [Technical Skills]
+Programming Languages: Python, C, C++
+
+Data Structures & Algorithms (DSA)
+
+AI & ML: Basics
+
+Database Management: MySQL
+
+Version Control: Git, GitHub
+
+Web Development: HTML, CSS, JavaScript
+
+Python Libraries: NumPy, Pandas, Matplotlib, Seaborn, OpenCV, LangChain
+
+Others: Problem-solving, debugging
+
+ [Soft Skills]
+Communication & Teamwork
+
+Leadership
+
+Time Management
+
+Critical Thinking
+
+ [Projects]
+1}Waste Classification Using Machine Learning
+
+Built a CNN model to classify waste as recyclable or organic using a Kaggle dataset.
+
+Used Python, TensorFlow, NumPy, Pandas for preprocessing and evaluation.
+
+2)Linear Regression for Energy Consumption Prediction
+
+Built a model to analyze the impact of temperature on energy consumption.
+
+Used Python (Pandas, NumPy, Scikit-learn) for visualization and model evaluation.
+
+3)Website Development – Yukti 2K25
+
+Contributed to the official website of Yukti 2K25 national-level fest.
+
+Focused on interactive features and performance optimization.
+
+4)Law & Crime Assistant
+
+Built using LangChain, Cohere, and Serper API.
+
+Answers questions about IPC sections and provides recent crime news updates.
+
+ [Certifications & Achievements]
+NPTEL – Joy of Computing Using Python (Jul–Oct 2023)
+Scored 88% — Top 5% of learners
+View Certificate
+
+Code Prahari – Samveekshana 2025
+National-level coding competition at SGBIT
+3rd Place (MCQs, Debugging, Coding)
+
+ [Links]
+Portfolio: https://memanju2005.github.io/portfolio/
+
+GitHub: https://github.com/memanju2005
+
+LinkedIn: https://www.linkedin.com/in/manjunath-kotabagi
+
+Email: kotabagimanju240@gmail.com
+
+Phone: +91 8152900191
+
+Location: Belagavi, Karnataka
