@@ -3,53 +3,57 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from fastapi.responses import HTMLResponse
 import uvicorn
+import os
 
 # LangChain Imports
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 
-
-
+# Embedding and LLM
 from langchain.embeddings import HuggingFaceInferenceAPIEmbeddings
-import os
+from langchain_community.llms import Cohere
 
 
-from langchain.llms import Cohere
-# Step 1: Load all documents
+# --- Load and Split Documents ---
 file_paths = ["data/resume_data.txt", "data/portfolio_data.txt", "data/mkcrack.txt"]
 documents = []
-
 for path in file_paths:
     loader = TextLoader(path, encoding="utf-8")
     docs = loader.load()
     documents.extend(docs)
 
-# Step 2: Chunk the documents
 splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 chunks = splitter.split_documents(documents)
 
-# Step 3: Embed using Hugging Face
+# --- Embedding with HuggingFace API Token ---
+HF_TOKEN = os.environ["HUGGINGFACEHUB_API_TOKEN"]
 
-# Set your model and API token
 embeddings = HuggingFaceInferenceAPIEmbeddings(
-    api_key=os.environ["HUGGINGFACEHUB_API_TOKEN"],
+    api_key=HF_TOKEN,
     model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
-vectorstore = FAISS.from_documents(chunks, embeddings)
 
-# Step 4: Initialize Cohere's command model
+# Embed chunks manually (required for API-based embedding)
+texts = [doc.page_content for doc in chunks]
+metadatas = [doc.metadata for doc in chunks]
 
+vectors = embeddings.embed_documents(texts)
+# Convert to FAISS-compatible format
+from langchain.docstore.document import Document
+docs = [Document(page_content=text, metadata=meta) for text, meta in zip(texts, metadatas)]
 
+vectorstore = FAISS.from_embeddings(texts, vectors, metadatas)
+
+# --- Cohere LLM ---
 llm = Cohere(
     cohere_api_key=os.environ["COHERE_API_KEY"],
     model="command"
 )
 
-# Step 5: Prompt Template
+# --- Prompt Template ---
 prompt_template = """You are Emo — Manjunath K’s personal portfolio assistant bot 🤖.
 You're helpful, polite, chill, and only answer questions based on the provided context.
 
@@ -75,7 +79,7 @@ custom_prompt = PromptTemplate(
     input_variables=["context", "question"]
 )
 
-# Step 6: QA Chain
+# --- QA Chain ---
 qa_chain = RetrievalQA.from_chain_type(
     llm=llm,
     retriever=vectorstore.as_retriever(search_kwargs={"k": 3}),
@@ -83,19 +87,17 @@ qa_chain = RetrievalQA.from_chain_type(
     chain_type_kwargs={"prompt": custom_prompt}
 )
 
-# --- API Setup ---
+# --- FastAPI Setup ---
 app = FastAPI()
 
-# Enable CORS for frontend access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Replace with your portfolio domain in production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Root Route
 @app.get("/", response_class=HTMLResponse)
 async def root():
     return """
@@ -103,7 +105,6 @@ async def root():
     <p>Use <code>POST /ask</code> to query the bot.</p>
     """
 
-# POST Endpoint
 class Query(BaseModel):
     query: str
 
@@ -112,6 +113,5 @@ async def ask_bot(query: Query):
     answer = qa_chain.run(query.query)
     return {"answer": answer}
 
-# Run the server
 if __name__ == "__main__":
     uvicorn.run("chatbot_api:app", host="127.0.0.1", port=8000, reload=True)
